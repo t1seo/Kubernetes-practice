@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx # ReplicaSet 이름
+spec:
+  replicas: 3 # ReplicaSet 복제수
+  selector:
+    matchLabels: # match 해야 하는 label
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx # app label
+    spec:
+      containers:
+        - name: nginx # container 이름
+          image: nginx:latest # container 이미지

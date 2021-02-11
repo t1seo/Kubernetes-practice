@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo # Deployment 이름
+spec:
+  replicas: 3 # Deployment 복제수
+  selector:
+    matchLabels:
+      app: echo # Deployment label
+  template:
+    metadata:
+      labels:
+        app: echo # Container label
+    spec:
+      containers:
+        - name: echo # Container name
+          image: ghcr.io/subicura/echo:v1 # Container image
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: echo
+spec:
+  type: NodePort
+  ports:
+    - port: 3000 # NodePort Port
+      protocol: TCP
+      nodePort: 32000 # NodePort NodePort
+  selector:
+    app: echo

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment # deployment
+metadata:
+  name: echo-deploy
+spec:
+  replicas: 4 # 복제 개수
+  selector:
+    matchLabels: # 일치해야 하는 라벨
+      app: echo
+      tier: app
+  template:      # 컨테이너
+    metadata:
+      labels:    # app-label
+        app: echo
+        tier: app
+    spec:        # container 스펙
+      containers:
+        - name: echo
+          image: ghcr.io/subicura/echo:v2 # 버전 업데이트
